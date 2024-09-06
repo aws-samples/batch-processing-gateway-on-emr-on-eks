@@ -1,0 +1,101 @@
+image:  
+  registry: 
+  repository: bpg
+  tag: 1.0.0
+replicas: 1
+
+namespace: bpg
+
+resources:
+  requests:
+    memory: '2G'
+    cpu: "1"
+  limits:
+    memory: '4G'
+    cpu: "2"
+
+
+ingress:
+  endpoint: 'bpg.values.example.com'
+  # tlsSecretName: 'bpg.tls.name.values.example'
+
+plainConfig:
+  defaultSparkConf:
+    spark.kubernetes.submission.connectionTimeout: 30000
+    spark.kubernetes.submission.requestTimeout: 30000
+    spark.kubernetes.driver.connectionTimeout: 30000
+    spark.kubernetes.driver.requestTimeout: 30000
+    spark.sql.debug.maxToStringFields: 75
+
+  sparkClusters:
+    - weight: 50
+      id: spark-cluster-a
+      eksCluster: 
+      masterUrl: 
+      caCertDataSOPS: 
+      userTokenSOPS: 
+      sparkApplicationNamespace: spark-operator
+      sparkServiceAccount: emr-containers-sa-spark-operator
+      sparkVersions:
+        - 3.5.0
+      queues:
+        - dev
+      ttlSeconds: 86400
+      timeoutMillis: 180000
+      sparkConf:
+        spark.kubernetes.executor.podNamePrefix: '{spark-application-resource-name}'
+        spark.eventLog.enabled: "false"
+        spark.kubernetes.allocation.batch.size: 2000
+        spark.kubernetes.allocation.batch.delay: 1s
+
+    - weight: 50
+      id: spark-cluster-b
+      eksCluster: 
+      masterUrl: 
+      caCertDataSOPS: 
+      userTokenSOPS: 
+      userName: emr-containers-sa-spark-operator
+      sparkApplicationNamespace: spark-operator
+      sparkServiceAccount: emr-containers-sa-spark-operator
+      sparkVersions:
+        - 3.5.0
+      queues:
+        - dev
+      ttlSeconds: 86400
+      timeoutMillis: 180000
+      sparkConf:
+        spark.kubernetes.executor.podNamePrefix: '{spark-application-resource-name}'
+        spark.eventLog.enabled: "false"
+        spark.kubernetes.allocation.batch.size: 2000
+        spark.kubernetes.allocation.batch.delay: 1s
+
+  sparkImages:
+    - name: 895885662937.dkr.ecr.us-west-2.amazonaws.com/spark/emr-6.10.0:latest
+      types:
+        - Java
+        - Scala
+        - python
+      version: "3.5.0"
+
+  allowedUsers:
+    - '*'
+  queues:
+    - name: dev
+  maxRunningMillis: 21600000
+  dbStorageSOPS:
+    connectionString: 
+    user: 
+    password: 
+    dbName: 
+  server:
+    applicationConnectors:
+      - type: http
+        port: 8080
+  logging:
+    level: INFO
+    loggers:
+      com.apple.spark: INFO
+
+# For Swagger UI which visualizes API specs.
+swagger:
+  image: 'swaggerapi/swagger-ui:v4.14.0'
