@@ -6,4 +6,4 @@ bpg/values.yaml
 emr-on-eks/spark-pi.yaml
 ash_output
 probe_output
-
+.vscode
