@@ -194,4 +194,3 @@ See the [LICENSE](/LICENSE) for more information.
 ## 12. Disclaimer
 
 This solution deploys the Open Source Batch Processing Gateway (BPG) in the AWS cloud. BPG is an external open source project, and AWS makes no claims regarding its security properties. Please evaluate BPG according to your organization's security best practices.
-
