@@ -45,7 +45,6 @@ Error from server (BadRequest): container "spark-kubernetes-driver" in pod "spar
 After successful completion of the job, you should be able to see the below message in the logs. 
 
 ```
-You should see a line like below in the logs:
 Pi is roughly 3.1452757263786317
 ```
 
