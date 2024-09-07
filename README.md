@@ -142,7 +142,47 @@ Content-Length: 67
 ```sh
 kubectl config get-contexts | awk 'NR==1 || /spark-cluster-(a|b)/'
 kubectl get pods -n spark-operator --context "<CONTEXT_NAME>"
-kubectl get pods -n spark-operator --context "<CONTEXT_NAME>"
+```
+
+<Details>
+Depending on the number of times the job was submitted, you should see something similar to the output below.
+
+```
+NAME                                                      READY   STATUS      RESTARTS   AGE
+spark-cluster-a-05f147d9675d4b358552c00b8bf5ef62-driver   0/1     Completed   0          14m
+spark-cluster-a-982b374829e74fa8b56a0204833217b6-driver   0/1     Completed   0          14m
+spark-operator-demo-557c55c785-dszbj                      1/1     Running     0          166m
+```
+</Details>
+
+```
+kubectl logs <spark driver pod name> --namespace spark-operator --context "<CONTEXT_NAME>"
+```
+
+After successful completion of the job, you should be able to see the below message in the logs.
+
+```
+Pi is roughly 3.1452757263786317
+```
+
+You can also further introspect the SparkApplication as below:
+
+kubectl get sparkapplications --namespace spark-operator --context "<CONTEXT_NAME>"
+
+<Details>
+Depending on the number of times the job was submitted, you should see something similar to the output below.
+
+```
+NAME                                               STATUS      ATTEMPTS   START                  FINISH                 AGE
+spark-cluster-a-05f147d9675d4b358552c00b8bf5ef62   COMPLETED   1          2024-09-07T20:55:58Z   2024-09-07T20:55:58Z   20m
+spark-cluster-a-982b374829e74fa8b56a0204833217b6   COMPLETED   1          2024-09-07T20:56:07Z   2024-09-07T20:56:07Z   20m
+```
+</Details>
+
+You can check events for the SparkApplication object with the following command:
+
+````
+kubectl describe sparkapplication  <Spark Application Name> --namespace spark-operator --context "<CONTEXT_NAME>"
 ```
 
 ## 9. Cleanup
