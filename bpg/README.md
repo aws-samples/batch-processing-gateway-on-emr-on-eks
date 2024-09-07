@@ -37,6 +37,10 @@ chmod 400 eks_publickey.pem
 
 **Disclaimer**: For the purposes of this post, we utilized the default VPC for deploying the solution. Please modify the steps below to deploy the solution into the appropriate VPC in accordance with your organization’s best practices.See the official guidance on how to [Create a VPC](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)
 
+**Note**: Filtering out us-east-1e subnet due to its known limitation in supporting the Amazon EKS control plane.This Availability Zone (AZ) in the `us-east-1` region does not reliably support EKS cluster control planes,and attempting to use it can result in errors or failed deployments. To ensure smooth cluster creation,we exclude it from the list of default subnets when passing subnets to the eksctl create cluster command.
+
+**Error Message**: "Cannot create cluster "<spark cluster name>" because EKS does not support creating control plane instances in us-east-le, the targeted availability zone. Retry cluster creation using control plane subnets that span at least two of these availability zone. 
+
 ```sh
 export  DEFAULT_FOR_AZ_SUBNET=$(aws ec2 describe-subnets --region "$AWS_REGION" --filters "Name=default-for-az,Values=true" --query "Subnets[?AvailabilityZone != 'us-east-1e'].SubnetId" | jq -r '. | map(tostring) | join(",")')
 ```
@@ -125,6 +129,10 @@ aws ecr get-login-password --region "$AWS_REGION" | docker login --username AWS 
 ```
 
 #### 6.4 Build Your Docker Image
+
+```sh
+cd ~/batch-processing-gateway/
+```
 
 ```sh
 docker build \
@@ -219,7 +227,7 @@ aws rds create-db-instance \
     --region "$AWS_REGION"
 ```
 
-On AWS Console, navigate to Amazon RDS and clicj on Databases link on the left pane to see the details. The ```bpg``` Reader and Writer instances should be in Available status.
+On AWS Console, navigate to Amazon RDS and click on Databases link on the left pane to see the details. The ```bpg``` Reader and Writer instances should be in Available status.
 
 ![Alt text](../images/bpg-rds.png)
 
@@ -293,6 +301,8 @@ Please ensure that the ```image.tag``` value in both ```values.template.yaml``` 
 cp ~/batch-processing-gateway/helm/batch-processing-gateway/values.yaml ~/batch-processing-gateway/helm/batch-processing-gateway/values.yaml.$(date +'%Y%m%d%H%M%S') \
 && cp ~/batch-processing-gateway-on-emr-on-eks/bpg/values.yaml ~/batch-processing-gateway/helm/batch-processing-gateway/values.yaml \
 && cd ~/batch-processing-gateway/helm/batch-processing-gateway/
+
+kubectl config use-context "$BPG_CLUSTER_CONTEXT"
 
 helm install batch-processing-gateway . --values values.yaml -n bpg
 ```
