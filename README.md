@@ -169,8 +169,8 @@ aws rds delete-db-cluster \
     --db-cluster-identifier bpg \
     --skip-final-snapshot
 
-# Delete bpgsecuritygroup Security Group
-BPG_SG=$(aws ec2 describe-security-groups --filters "Name=group-name,Values=bpgsecuritygroup" --query "SecurityGroups[*].GroupId" --output text)
+# Delete bpg-rds-securitygroup Security Group
+BPG_SG=$(aws ec2 describe-security-groups --filters "Name=group-name,Values=bpg-rds-securitygroup" --query "SecurityGroups[*].GroupId" --output text)
 aws ec2 delete-security-group --group-id "$BPG_SG"
 
 # Delete Amazon EKS clusters
