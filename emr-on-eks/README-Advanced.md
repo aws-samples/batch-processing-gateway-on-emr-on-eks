@@ -47,8 +47,12 @@ export CLUSTER_NAME=<CLUSTER_NAME>
 
 **Disclaimer**: For the purposes of this post, we utilized the default VPC for deploying the solution. Please modify the steps below to deploy the solution into the appropriate VPC in accordance with your organization’s best practices.See the official guidance on how to [Create a VPC](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)
 
+**Note**: Filter out us-east-1e subnet due to its known limitation in supporting the Amazon EKS control plane.This Availability Zone (AZ) in the us-east-1 region does not reliably support EKS cluster control planes,and attempting to use it can result in errors or failed deployments. To ensure smooth cluster creation,we exclude it from the list of default subnets when passing subnets to the eksctl create cluster command.
+
+**Error Message**: "Cannot create cluster "<spark cluster name>" because EKS does not support creating control plane instances in us-east-le, the targeted availability zone. Retry cluster creation using control plane subnets that span at least two of these availability zone
+
 ```sh
-export DEFAULT_FOR_AZ_SUBNET=$(aws ec2 describe-subnets --region $AWS_REGION --filters "Name=default-for-az,Values=true" --query "Subnets[*].SubnetId" | jq -r '. | map(tostring) | join(",")')
+export  DEFAULT_FOR_AZ_SUBNET=$(aws ec2 describe-subnets --region "$AWS_REGION" --filters "Name=default-for-az,Values=true" --query "Subnets[?AvailabilityZone != 'us-east-1e'].SubnetId" | jq -r '. | map(tostring) | join(",")')
 ```
 
 #### 4.3 Create Amazon EKS cluster 
