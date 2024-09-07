@@ -155,6 +155,8 @@ spark-operator-demo-557c55c785-dszbj                      1/1     Running     0 
 ```
 </Details>
 
+You can view the Driver logs to find the value of Pi as shows below.
+
 ```
 kubectl logs <spark driver pod name> --namespace spark-operator --context "<CONTEXT_NAME>"
 ```
