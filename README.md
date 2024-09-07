@@ -167,7 +167,9 @@ Pi is roughly 3.1452757263786317
 
 You can also further introspect the SparkApplication as below:
 
+```
 kubectl get sparkapplications --namespace spark-operator --context "<CONTEXT_NAME>"
+```
 
 <Details>
 Depending on the number of times the job was submitted, you should see something similar to the output below.
@@ -181,7 +183,7 @@ spark-cluster-a-982b374829e74fa8b56a0204833217b6   COMPLETED   1          2024-0
 
 You can check events for the SparkApplication object with the following command:
 
-````
+```
 kubectl describe sparkapplication  <Spark Application Name> --namespace spark-operator --context "<CONTEXT_NAME>"
 ```
 
