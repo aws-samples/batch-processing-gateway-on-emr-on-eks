@@ -29,7 +29,7 @@ Before deploying this solution, ensure the following prerequisites are in place:
 -	Access to a valid [AWS account](https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fportal.aws.amazon.com%2Fbilling%2Fsignup%2Fresume&client_id=signup)
 - The [AWS Command Line Interface](http://aws.amazon.com/cli) (AWS CLI) [installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on your local machine 
 - [```git```](https://github.com/git-guides/install-git)
-, [```docker```](https://docs.docker.com/engine/install/), [```eksctl```](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html),[```kubectl```](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html), [```helm```](https://helm.sh/docs/intro/install/), [```jq```](https://jqlang.github.io/jq/) and [```yq```](https://mikefarah.gitbook.io/yq) utilities are installed on the local machine
+, [```docker```](https://docs.docker.com/engine/install/), [```eksctl```](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html),[```kubectl```](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html), [```helm```](https://helm.sh/docs/intro/install/), [```jq```](https://jqlang.github.io/jq/) and [```yq```](https://mikefarah.gitbook.io/yq) installed on your local machine
 -	Permission to create AWS resources
 - Familiarity with [Kubernetes](https://kubernetes.io/), [Amazon EKS](https://aws.amazon.com/eks/), and [Amazon EMR on EKS](https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html)
 
