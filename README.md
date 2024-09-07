@@ -41,16 +41,16 @@ We assume that all repositories are cloned into the home directory (~/). All rel
 
 ```sh
 cd ~/
-git clone https://github.com/aws-samples/batch-processing-gateway-on-emr-on-eks
+git clone git@github.com:aws-samples/batch-processing-gateway-on-emr-on-eks.git
 ```
 
 ####  Batch Processing Gateway
 
 **Disclaimer**: 
-The Batch Processing Gateway repository is currently under active development. To provide a stable deployment experience consistent with the provided instructions, we have pinned the repository to the latest stable commit hash at the time this code was pushed. We have tested the solution against commit ```aa3e5c8be973bee54ac700ada963667e5913c865```. Before cloning the repository, please verify any security updates and adhere to your organization's security practices.
+The Batch Processing Gateway repository is currently under active development. To provide a stable deployment experience consistent with the provided instructions, we have pinned the repository to the latest stable commit hash at the time this code was published. We have tested the solution against commit ```aa3e5c8be973bee54ac700ada963667e5913c865```. Before cloning the repository, please verify any security updates and adhere to your organization's security practices.
 
 ```sh
-git clone https://github.com/apple/batch-processing-gateway
+git clone git@github.com:apple/batch-processing-gateway.git
 cd batch-processing-gateway
 git checkout aa3e5c8be973bee54ac700ada963667e5913c865
 ```
