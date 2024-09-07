@@ -145,7 +145,7 @@ kubectl get pods -n spark-operator --context "<CONTEXT_NAME>"
 ```
 
 <Details>
-Depending on the number of times the job was submitted, you should see something similar to the output below.
+Depending on the number of times the job was submitted, you should see something similar to the output below:
 
 ```
 NAME                                                      READY   STATUS      RESTARTS   AGE
@@ -155,13 +155,13 @@ spark-operator-demo-557c55c785-dszbj                      1/1     Running     0 
 ```
 </Details>
 
-You can view the Driver logs to find the value of Pi as shows below.
+You can view the Driver logs to find the value of Pi as shows below:
 
 ```
 kubectl logs <spark driver pod name> --namespace spark-operator --context "<CONTEXT_NAME>"
 ```
 
-After successful completion of the job, you should be able to see the below message in the logs.
+After successful completion of the job, you should be able to see the below message in the logs:
 
 ```
 Pi is roughly 3.1452757263786317
@@ -174,7 +174,7 @@ kubectl get sparkapplications --namespace spark-operator --context "<CONTEXT_NAM
 ```
 
 <Details>
-Depending on the number of times the job was submitted, you should see something similar to the output below.
+Depending on the number of times the job was submitted, you should see something similar to the output below:
 
 ```
 NAME                                               STATUS      ATTEMPTS   START                  FINISH                 AGE
