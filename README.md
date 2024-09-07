@@ -1,4 +1,4 @@
-# Improve Resiliency, High Availability and Maintainability of Apache Spark workloads on Amazon EMR on EKS using Batch Processing Gateway 
+# Use Batch Processing Gateway to automate job management in multi-cluster Amazon EMR on EKS environments  
 
 ## 1. Introduction 
 
