@@ -57,20 +57,20 @@ git checkout aa3e5c8be973bee54ac700ada963667e5913c865
 
 ## 7. Deploy the solution
 
-#### 1 [Setup Amazon EMR on EKS clusters and run Spark jobs with the Spark operator](emr-on-eks/README.md)
-#### 2 [Setup Batch Processing Gateway on Amazon EKS and Submit Spark jobs to Amazon EMR on EKS clusters](bpg/README.md) 
+#### 1. [Setup Amazon EMR on EKS clusters and run Spark jobs with the Spark operator](emr-on-eks/README.md)
+#### 2. [Setup Batch Processing Gateway on Amazon EKS and Submit Spark jobs to Amazon EMR on EKS clusters](bpg/README.md) 
 
 ## 8. Testing the solution
 Submit multiple Apache Spark job by executing the below sample code multiple times. The below code submits the SparkPi Spark job to the Batch Processing Gateway. 
 
-#### 1 Set the kubectl context to ```bpg``` cluster
+#### 1. Set the kubectl context to ```bpg``` cluster
 
 ```sh
 kubectl config get-contexts | awk 'NR==1 || /bpg-cluster/'
 kubectl config use-context "<CONTEXT_NAME>"
 ```
 
-#### 2 Identify the ```bpg``` pod name
+#### 2. Identify the ```bpg``` pod name
 
 ```sh
 kubectl get pods --namespace bpg
@@ -88,7 +88,7 @@ bpg-swagger-ui-5886d9d47f-qx289   1/1     Running   0                8h
 </Details>
 
 
-#### 3  Exec into the ```bpg``` pod and submit multple Spark jobs using ```curl``` command
+#### 3. Exec into the ```bpg``` pod and submit multple Spark jobs using ```curl``` command
 
 **Disclaimer**: Batch Processing Gateway does not include authentication out of the box. For more information, please refer to the [Auth](https://github.com/apple/batch-processing-gateway?tab=readme.-ov-file#auth) section. Ensure that you follow your organization’s best practices for securing the endpoints.
 
@@ -137,7 +137,7 @@ Content-Length: 67
 {"submissionId":"spark-cluster-b-7b61d5d512bb4adeb1dd8a9977d605df"}
 ```
 
-#### 4  Verify that the jobs are running in the EMR cluster ```spark-cluster-a``` and ```spark-cluster-b``` 
+#### 4. Verify that the jobs are running in the EMR cluster ```spark-cluster-a``` and ```spark-cluster-b``` 
 
 ```sh
 kubectl config get-contexts | awk 'NR==1 || /spark-cluster-(a|b)/'
