@@ -54,6 +54,6 @@ Log in to the AWS Management Console, go to the EMR service, and click on EMR on
 
 ![Alt text](../images/emr-on-eks-virtual-clusters.png)
 
-#### 5. (Optional) Execute Spark job in ```spark-cluster-a-v``` and ```spark-cluster-b-v``` to test the setup
+#### 6. (Optional) Execute Spark job in ```spark-cluster-a-v``` and ```spark-cluster-b-v``` to test the setup
 
 Navigate to [README-Spark.md](README-Spark.md) and follow the steps to run Spark jobs.
