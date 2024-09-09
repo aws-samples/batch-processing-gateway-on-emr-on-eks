@@ -222,6 +222,9 @@ eksctl delete cluster --region="$AWS_REGION" --name=bpg-cluster
 eksctl delete cluster --region="$AWS_REGION" --name=spark-cluster-a
 eksctl delete cluster --region="$AWS_REGION" --name=spark-cluster-b
 
+# Delete bpg ECR repository:
+aws ecr delete-repository --repository-name bpg --region="$AWS_REGION" --force
+
 # Delete Keypairs
 aws ec2 delete-key-pair --key-name ekskp
 aws ec2 delete-key-pair --key-name emrkp
